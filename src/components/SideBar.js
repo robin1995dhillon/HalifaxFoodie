@@ -21,6 +21,9 @@ function SideBar() {
                 <li>
                     <Link to="/logout">Logout</Link>
                 </li>
+                <li>
+                    <Link to="/wordcloud">Wordcloud</Link>
+                </li>
             </ul>
         </div>
     )

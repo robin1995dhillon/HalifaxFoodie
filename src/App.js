@@ -8,6 +8,9 @@ import Logout from './components/Logout';
 import {BrowserRouter, Route, Switch } from "react-router-dom";
 import NavBar from './components/NavBar';
 import OnlineSupport from './components/OnlineSupport';
+import DataProcessing from './components/DataProcessing';
+import Test from './components/Test';
+
 
 function App() {
   return (
@@ -30,10 +33,13 @@ function App() {
          <Review/>
       </Route>
       <Route exact path ="/logout">
-         <Logout/>
+         <Test/>
       </Route>
       <Route exact path ="/onlinesupport">
          <OnlineSupport/>
+      </Route>      
+      <Route exact path ="/wordcloud">
+         <DataProcessing/>
       </Route>
      </Switch>
      </BrowserRouter>
