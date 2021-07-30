@@ -9,7 +9,6 @@ import {BrowserRouter, Route, Switch } from "react-router-dom";
 import NavBar from './components/NavBar';
 import OnlineSupport from './components/OnlineSupport';
 import DataProcessing from './components/DataProcessing';
-import Test from './components/Test';
 
 
 function App() {
@@ -33,7 +32,7 @@ function App() {
          <Review/>
       </Route>
       <Route exact path ="/logout">
-         <Test/>
+         <Logout/>
       </Route>
       <Route exact path ="/onlinesupport">
          <OnlineSupport/>

@@ -30,7 +30,7 @@ function OnlineSupport() {
       //border= "10px solid black " 
       height="430px"
       region="us-east-1"
-      headerText="Halifax Foodie11"
+      headerText="Halifax Foodie"
       headerStyle={{ backgroundColor:"#ABD5D9", fontSize: "10px" }}
       
     />
