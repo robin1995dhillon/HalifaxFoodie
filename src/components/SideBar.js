@@ -24,6 +24,9 @@ function SideBar() {
                 <li>
                     <Link to="/wordcloud">Wordcloud</Link>
                 </li>
+                <li>
+                    <Link to="/livechat">Live Chat</Link>
+                </li>
             </ul>
         </div>
     )

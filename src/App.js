@@ -9,6 +9,11 @@ import {BrowserRouter, Route, Switch } from "react-router-dom";
 import NavBar from './components/NavBar';
 import OnlineSupport from './components/OnlineSupport';
 import DataProcessing from './components/DataProcessing';
+import LiveChat from './components/LiveChat';
+import RepresentativeChat from './components/RepresentativeChat';
+import ManagerChat from './components/ManagerChat';
+import ManagerCustomer from './components/ManagerToCustomer';
+import RepresentativeCustomer from './components/RepToCust';
 
 
 function App() {
@@ -39,6 +44,21 @@ function App() {
       </Route>      
       <Route exact path ="/wordcloud">
          <DataProcessing/>
+      </Route>
+      <Route exact path ="/livechat">
+         <LiveChat/>
+      </Route>
+      <Route exact path ="/representativechat">
+         <RepresentativeChat/>
+      </Route>
+      <Route exact path ="/managerchat">
+         <ManagerChat/>
+      </Route>
+      <Route exact path ="/managercustomer">
+         <ManagerCustomer/>
+      </Route>
+      <Route exact path ="/representativecustomer">
+         <RepresentativeCustomer/>
       </Route>
      </Switch>
      </BrowserRouter>
