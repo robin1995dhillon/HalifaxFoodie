@@ -4,11 +4,10 @@ import { useHistory } from "react-router-dom";
 import { useAuthDispatch } from "../../context/auth";
 import { useFormFields } from "../../libs/useFormFields";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
-import "./Login.css";
+import "./ConfirmationCode.css";
 
-export default function Login() {
-  const [fields, setFields] = useFormFields({ email: "", password: "" });
+export default function ConfirmationCode() {
+  const [fields, setFields] = useFormFields({ confirmationCode: "" });
   const [error, setError] = useState("");
   const dispatch = useAuthDispatch();
   const history = useHistory();
@@ -16,23 +15,18 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const userName = history.location.state;
       const res = await axios.post(
-        "https://ni15wn2vq3.execute-api.us-east-1.amazonaws.com/test/user",
-        { userName: fields.email, password: fields.password }
+        "https://ni15wn2vq3.execute-api.us-east-1.amazonaws.com/test/confirm-code",
+        { confirmationCode: fields.confirmationCode, userName }
       );
       // console.log(fields.password);
       // const data = await Auth.signIn(fields.email, fields.password);
       if (res.data.statusCode === 200) {
-        const tokens = JSON.parse(res.data.body);
-        console.log(tokens);
-        // localStorage.setItem("idToken", tokens.idToken);
-        const decodedData = jwt_decode(tokens.idToken);
-        console.log(decodedData);
-        history.push({ pathname: "/login/qa", state: tokens.idToken });
+        history.push("/login");
         // history.push("/");
       } else {
-        setError("Invalid creds!");
-
+        setError("Wrong code!");
         console.log(res);
       }
     } catch (e) {
@@ -42,31 +36,25 @@ export default function Login() {
   };
 
   const validateInput = () => {
-    return fields.email.length > 0 && fields.password.length > 0;
+    return fields.confirmationCode.length > 0;
   };
 
   return (
-    <div className="Login">
+    <div className="ConfirmPage">
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email">
-          <Form.Label>Username</Form.Label>
+        <Form.Group controlId="confirmationCode">
+          <Form.Label>
+            Enter the confirmation code sent to your email here:
+          </Form.Label>
           <Form.Control
             autoFocus
             type="text"
             onChange={setFields}
           ></Form.Control>
         </Form.Group>
-        <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            autoFocus
-            type="password"
-            onChange={setFields}
-          ></Form.Control>
-        </Form.Group>
         <p>{error}</p>
         <Button type="submit" size="lg" block disabled={!validateInput()}>
-          Login
+          Submit
         </Button>
       </Form>
     </div>

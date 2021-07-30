@@ -1,11 +1,23 @@
+import logo from "./logo.svg";
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar.jsx";
-import Home from "./pages/Home/Home";
+import Home from "./components/Home";
+import SideBar from "./components/SideBar";
+import FeedBack from "./components/FeedBack";
+import Review from "./components/Review";
+import Logout from "./components/Logout";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import OnlineSupport from "./components/OnlineSupport";
+import DataProcessing from "./components/DataProcessing";
 import Login from "./pages/Login/Login";
-import { useEffect } from "react";
-import { Auth } from "aws-amplify";
+import Qa from "./pages/QA/Qa";
+import Signup from "./pages/Signup/Signup";
+import ConfirmationCode from "./pages/ConfrimationCode/ConfirmationCode";
+import NavbarComponent from "./components/Navbar2";
 import { useAuthDispatch } from "./context/auth";
+import jwtDecode from "jwt-decode";
+import { useEffect } from "react";
+// import Test from './components/Test';
 
 function App() {
   const dispatch = useAuthDispatch();
@@ -15,23 +27,53 @@ function App() {
 
   async function onLoad() {
     try {
-      const data = await Auth.currentSession();
-      console.log(data.getIdToken().payload["cognito:username"]);
-      let payload = {};
-      payload.user = data.getIdToken().payload["cognito:username"];
-      dispatch({ type: "LOGIN", payload });
+      const idToken = localStorage.getItem("idToken");
+      if (idToken) {
+        // const data = await Auth.currentSession();
+        const decodedData = jwtDecode(idToken);
+        console.log(decodedData["cognito:username"]);
+        let payload = {};
+        payload.user = decodedData["cognito:username"];
+        dispatch({ type: "LOGIN", payload });
+      }
     } catch (e) {
       console.log(e);
     }
   }
-
   return (
-    <div>
-      <Navbar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-      </Switch>
+    <div className="App">
+      <BrowserRouter>
+        <NavbarComponent />
+        <SideBar />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/feedback">
+            <FeedBack />
+          </Route>
+          <Route exact path="/review">
+            <Review />
+          </Route>
+          {/* <Route exact path ="/logout">
+         <Test/>
+      </Route> */}
+          <Route exact path="/onlinesupport">
+            <OnlineSupport />
+          </Route>
+          <Route exact path="/wordcloud">
+            <DataProcessing />
+          </Route>
+          {/* <Route exact path="/" component={Home} /> */}
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/login/qa" component={Qa} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/confirm-email" component={ConfirmationCode} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }

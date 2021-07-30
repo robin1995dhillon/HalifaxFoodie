@@ -1,0 +1,10 @@
+@media all and (min-width: 480px) {
+  .ConfirmPage {
+    padding: 60px 0;
+  }
+
+  .ConfirmPage form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}

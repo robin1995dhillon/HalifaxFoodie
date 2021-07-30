@@ -11,12 +11,47 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-select.form-control,
-textarea.form-control,
-input.form-control {
-  font-size: 1rem;
+h1 {
+  justify-content: right;
 }
-input[type="file"] {
+.navbar {
+  height: 65px;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow-y: hidden;
+  transition: 0.3s linear;
+  z-index: 1;
+}
+.navbar-brand {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.bg-teal {
+  background-color: rgb(192, 143, 37) !important;
+  /*background-color: rgb(139,69,19)!important;*/
+}
+#sidebar {
+  position: absolute;
+  top: 20;
+  height: 100%;
+  width: 200px;
+  padding-top: 20px;
+  background: rgb(100, 99, 41);
+  overflow-x: hidden;
+  transition: 0.3s linear;
+  z-index: 1;
+}
+#sidebar ul {
+  padding: 0;
+  margin: 0;
+}
+#sidebar a {
   width: 100%;
+  display: flex;
+  padding: 10px 5px;
+  color: #fff;
+  text-decoration: none;
+}
+#sidebar a:hover {
+  background-color: rgb(192, 143, 37);
 }
