@@ -26,16 +26,16 @@ const storage = new Storage({
   });
 const bucket = storage.bucket("input-bucket-s21");
 
-// Process the file upload and upload to Google Cloud Storage.
+// upload to Google Cloud Storage.
 app.post('/upload', multer.single('file'), (req, res, next) => {
     console.log('in post')
     
-  // Create a new blob in the bucket and upload the file data.
+  // upload file.
   const blob = bucket.file(req.file.originalname);
   const blobStream = blob.createWriteStream();
 
   blobStream.on('finish', () => {
-    // The public URL can be used to directly access the file via HTTP.
+   
     const publicUrl = format(
       `http://storage.googleapis.com/${bucket.name}/${blob.name}`
     );
@@ -58,11 +58,13 @@ app.get('/similarity', async (request, response) =>  {
       similarFileName += data
     })
     .on("end", () => {
+      console.log(similarFileName)
       const bucketName = 'output-bucket-s21';
       const fileName = similarFileName.split('\n')[0];
-      storage.bucket(bucketName).file(fileName).delete();
+      console.log(fileName)
+      storage.bucket(bucketName).file("similar-recipe-found").delete();
       return response.status(200).json({
-        similarFile: similarFileName
+        similarFile: fileName
       })
     })
     .on("error", () => {

@@ -30,6 +30,8 @@ class Review extends React.Component{
     getSimilarity = (event) => {
         axios.get('http://localhost:2000/similarity').then((result) => {
           this.setState({recipe: result.data.similarFile})
+          console.log('state changed')
+          console.log(this.state.recipe)
         })
       }
     
