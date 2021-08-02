@@ -58,11 +58,9 @@ app.get('/similarity', async (request, response) =>  {
       similarFileName += data
     })
     .on("end", () => {
-    //   const fileName = similarFileName.split(".")[0];
-    //   let recipeName = ''
-    //   for (const name of fileName.split("_")) {
-    //     recipeName += name.charAt(0).toUpperCase() + name.slice(1) + " ";
-    //   }
+      const bucketName = 'output-bucket-s21';
+      const fileName = similarFileName.split('\n')[0];
+      storage.bucket(bucketName).file(fileName).delete();
       return response.status(200).json({
         similarFile: similarFileName
       })
