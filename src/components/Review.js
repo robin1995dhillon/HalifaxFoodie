@@ -17,7 +17,7 @@ class Review extends React.Component{
         var filename = this.state.files
         console.log('in file upload')
         console.log(filename)
-        const response = await axios.post("http://localhost:2000/upload", formData).then(result => {
+        const response = await axios.post("https://halifaxfoodie-lx27w3oqvq-uc.a.run.app/upload", formData).then(result => {
             console.log("done");
         });
         }
@@ -28,7 +28,7 @@ class Review extends React.Component{
     }
 
     getSimilarity = (event) => {
-        axios.get('http://localhost:2000/similarity').then((result) => {
+        axios.get('https://halifaxfoodie-lx27w3oqvq-uc.a.run.app/similarity').then((result) => {
           this.setState({recipe: result.data.similarFile})
           console.log('state changed')
           console.log(this.state.recipe)
