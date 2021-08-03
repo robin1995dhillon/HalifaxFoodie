@@ -2,6 +2,7 @@ const http = require('http');
 const port = process.env.PORT || 2000
 const express = require('express');
 const app = express();
+var cors = require('cors')
 const server = http.createServer(app);
 const router = require('express').Router();
 const Multer = require('multer');
@@ -9,6 +10,20 @@ const {format} = require('util');
 const path = require('path');
 
 const serviceKey = path.join(__dirname, '../../strong-eon-288907-102fb557ef4d.json')
+
+const allowedOrigins = ['https://halifaxfoodie-lx27w3oqvq-uc.a.run.app/','http://localhost:3000/'];
+app.use(cors({
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+
 
 app.listen(port, () => {
     console.log("server started at http://localhost:" + port);
