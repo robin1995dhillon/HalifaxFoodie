@@ -26,7 +26,7 @@ const storage = new Storage({
   });
 const bucket = storage.bucket("input-bucket-s21");
 
-// upload to Google Cloud Storage.
+//upload to Cloud Storage.
 app.post('/upload', multer.single('file'), (req, res, next) => {
     console.log('in post')
     
